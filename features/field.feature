@@ -60,3 +60,68 @@ Player will need game field
         | . . . . . |
         | . . . . . |
         | . . . . . |
+
+  @conway
+  Scenario: Conway case 1, alone piece dies
+    Given I have an empty 3x3 game field
+      And I place gold piece at:
+        | 1 1 |
+      And I apply gold conway wave to field
+     Then game field should look like this:
+       | . . . |
+       | . . . |
+       | . . . |
+
+  @conway
+  Scenario: Conway case 2, group of two pieces dies
+    Given I have an empty 4x4 game field
+      And I place gold pieces at:
+        | 1 1 |
+        | 2 2 |
+      And I apply gold conway wave to field
+     Then game field should look like this:
+       | . . . . |
+       | . . . . |
+       | . . . . |
+       | . . . . |
+
+  @conway
+  Scenario: Conway case 3, birth in strange place
+    Given I have an empty 7x6 game field
+      And I place gold pieces at:
+        | 2 0  |
+        | 3 0 |
+        | 4 0 |
+        | 1 1 |
+        | 1 2 |
+        | 1 3 |
+        | 2 4 |
+        | 3 4 |
+        | 4 4 |
+        | 5 1 |
+        | 5 2 |
+        | 5 3 |
+      And I apply gold conway wave to field
+     Then game field should look like this:
+       | . . G G G . . | 
+       | . G . G . G . | 
+       | G G G . G G G | 
+       | . G . G . G . | 
+       | . . G G G . . | 
+       | . . . G . . . | 
+ 
+  @conway
+  Scenario: Conway case 4, birth and death
+    Given I have an empty 4x4 game field
+      And I place gold pieces at:
+       | 0 2 |
+       | 1 1 |
+       | 2 0 |
+       | 2 3 |
+       | 3 2 |
+      And I apply gold conway wave to field
+     Then game field should look like this:
+       | . . G . |
+       | . G G . |
+       | G G G . |
+       | . . . . |

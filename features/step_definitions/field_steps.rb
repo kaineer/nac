@@ -42,10 +42,14 @@ Then /^I have (\S+) (\S+) pieces? on board$/ do |count, color|
   assert_equal( quantity, @field.count( item ) )
 end
 
-Given /^I place (\S+) pieces at:$/ do |color, table|
+Given /^I place (\S+) pieces? at:$/ do |color, table|
   item = color.to_sym
   table.raw.flatten.each do |coords|
     x, y = coords.split( /\s+/ ).map{|s|s.to_i}
     @field[ x, y ] = item
   end
+end
+
+Given /^I apply (\S+) conway wave to field$/ do |color|
+  @field.conway( color.to_sym )
 end

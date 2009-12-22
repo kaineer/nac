@@ -42,6 +42,10 @@ module Nac
       [ sx, sy ]
     end
 
+    def visualize( visualizer )
+      visualizer.display_items( @items )
+    end
+
     def move( x, y, dir )
       dir = dir.downcase
       item = self[ x, y ]
@@ -92,10 +96,16 @@ module Nac
     end
 
     def init_states
+      @states = nil
       @states = empty_rectangle
 
       for_all_coordinates do |x, y|
         ngb = neibours( x, y )
+
+        # plain alone
+        if ngb.size == 0 && self[ x, y ] == @wave_item
+          @states[ y ][ x ] = :death
+        end
 
         # too lonely
         if ngb.size == 1 && self[ x, y ] == @wave_item

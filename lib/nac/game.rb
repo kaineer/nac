@@ -30,9 +30,10 @@ module Nac
     def round
       unless @sides_initialized[ @current_side ]
         init_side( @current_side )
+        @sides_initialized[ @current_side ] = true
       end
 
-      @field.conway( @current_side )
+      conway( @current_side )
       
       # TODO: visualize
       @field.visualize( @visualizer ) if @visualizer
@@ -42,7 +43,7 @@ module Nac
         run_commands( @command_source.get_commands( @current_side ) ) 
       else
         puts "Press ENTER to continue"
-        gets if @visualiser
+        gets if @visualizer
       end
 
       select_next_side
@@ -92,7 +93,7 @@ module Nac
     end
 
     def init_silver
-      bottom = @height - 2
+      bottom = @field.height - 2
       
       @field[ middle - 1, bottom - 1 ] = :silver
       @field[ middle + 0, bottom     ] = :silver
