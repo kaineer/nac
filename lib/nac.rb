@@ -15,10 +15,10 @@ if $0 == __FILE__
   require File.join( File.dirname( __FILE__ ), "nac/pause_input" )
   require File.join( File.dirname( __FILE__ ), "nac/console_input" )
 
-  game = Nac::Game.new( Nac::Field.new( 7 ), 
+  game = Nac::Game.new( Nac::Field.new( 15 ),
                         :visualizer => Nac::ConsoleVisualizer ,
-                        :command_source => Nac::ConsoleInput.new
-                        # :command_source => Nac::PauseInput.new( 0.1 )
+                        # :command_source => Nac::ConsoleInput.new
+                        :command_source => Nac::PauseInput.new( 0.1 )
                         )
 
   loop do
